@@ -21,3 +21,13 @@ class Treino(models.Model):
     name = models.CharField(max_length=10, blank=False)
     descricao = models.CharField(max_length=200)
     nivel = models.CharField(max_length=10 ,choices=NIVEL)
+
+class Matricula(models.Model):
+    PLANOS = (
+        ('A', 'Mensal'),
+        ('B', 'Semestral'),
+        ('C', 'Anual'),
+    )
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
+    treino = models.ForeignKey(Treino, on_delete=models.CASCADE)
+    plano = models.CharField(max_length=10, choices=PLANOS, blank=False, null=False, default='A')
